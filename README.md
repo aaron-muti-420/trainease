@@ -15,8 +15,8 @@ TrainEase is a powerful SaaS application built with Laravel, designed to simplif
 ## Tech Stack
 - **Backend**: Laravel (PHP Framework)
 - **Frontend**: Laravel Blade or Vue.js (optional for SPA)
-- **Database**: MySQL/PostgreSQL
-- **Deployment**: Docker, AWS, or other cloud providers
+- **Database**: MySQL
+- **Deployment**: Docker
 
 ## Getting Started
 
