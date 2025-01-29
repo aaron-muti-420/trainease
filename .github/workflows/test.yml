@@ -33,12 +33,11 @@ jobs:
 
     - name: Set Up SQLite Database
       run: |
-        mkdir -p database
         touch database/database.sqlite
 
     - name: Run Migrations
       run: |
-        php artisan migrate:fresh --seed
+        php artisan migrate
 
     # Start Laravel server in the background
     - name: Start Laravel Server
