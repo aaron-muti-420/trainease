@@ -14,41 +14,33 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-
     steps:
-    # Checkout the repository
     - name: Checkout Code
       uses: actions/checkout@v3
 
-    # Set up PHP
     - name: Set up PHP
       uses: shivammathur/setup-php@v2
       with:
         php-version: '8.3'
-        extensions: mbstring, pdo, mysql
+        extensions: mbstring, pdo, sqlite
         coverage: none
 
-    # Set up Node.js
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '22'
-
-    # Install Composer dependencies
     - name: Install Dependencies
       run: |
         composer install --ignore-platform-reqs
         npm install
         npm run build
 
-    # Copy environment file
-    - name: Set Up Environment
+    - name: Set Up SQLite Database
       run: |
-        cp .env.example .env
-        php artisan key:generate
+        mkdir -p database
         touch database/database.sqlite
-        php artisan migrate
 
+    - name: Run Migrations
+      run: |
+        php artisan migrate:fresh --seed
+
+    # Start Laravel server in the background
     - name: Start Laravel Server
       run: |
         php artisan serve --host=127.0.0.1 --port=8000 &  
@@ -57,4 +49,3 @@ jobs:
     - name: Run Tests
       run: |
         php artisan test
-   
