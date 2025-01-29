@@ -37,6 +37,8 @@ jobs:
 
     - name: Run Migrations
       run: |
+        cp .env.example .env
+        php artisan key:generate
         php artisan migrate
 
     # Start Laravel server in the background
