@@ -51,7 +51,6 @@ jobs:
 
     - name: Run Tests
       run: |
-        php artisan serve
         php artisan test
          
    
