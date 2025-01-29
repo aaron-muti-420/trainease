@@ -38,6 +38,8 @@ jobs:
     - name: Run Migrations
       run: |
         cp .env.testing .env
+        echo "DB_CONNECTION=sqlite" >> .env.testing
+        echo "DB_DATABASE=/home/runner/work/trainease/trainease/database/database.sqlite" >> .env.testing
         php artisan key:generate
         php artisan migrate
 
