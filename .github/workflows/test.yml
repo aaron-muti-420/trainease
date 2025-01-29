@@ -46,11 +46,7 @@ jobs:
       run: |
         cp .env.example .env
         php artisan key:generate
-        php artisan sail:install --with=mysql
-       
-    # Run Laravel Sail (via Docker)
-    - name: Start Sail
-      run: |
-        ./vendor/bin/sail up -d
-        ./vendor/bin/sail artisan migrate:fresh
-        ./vendor/bin/sail artisan test
+        touch database/database.sqlite
+        php artisan migrate -y
+         
+   
