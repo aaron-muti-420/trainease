@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Training;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,9 @@ class BadgeFactory extends Factory
     {
         return [
             //
+            'user_id' => User::factory(), // Create an associated User instance
+            'title' => $this->faker->word, // Generate a random word for the badge title
+            'description' => $this->faker->text, // Generate a random description
         ];
     }
 }

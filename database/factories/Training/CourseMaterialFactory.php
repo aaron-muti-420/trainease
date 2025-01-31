@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Training;
 
+use App\Models\Training\Training;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,10 @@ class CourseMaterialFactory extends Factory
     {
         return [
             //
+            'training_id' => Training::factory(),
+            'material_name' => $this->faker->sentence(3),
+            'material_type' => $this->faker->randomElement(['pdf', 'video', 'document', 'presentation']),
+            'material_url' => $this->faker->url(),
         ];
     }
 }

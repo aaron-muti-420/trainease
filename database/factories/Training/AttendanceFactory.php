@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Training;
 
+use App\Models\Training\Enrollment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,10 @@ class AttendanceFactory extends Factory
     {
         return [
             //
+            'enrollment_id' => Enrollment::factory(),
+            'date' => $this->faker->date(),
+            'status' => $this->faker->randomElement(['present', 'absent', 'late']),
+
         ];
     }
 }

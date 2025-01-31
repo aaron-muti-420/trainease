@@ -2,6 +2,8 @@
 
 namespace Database\Factories\Training;
 
+use App\Models\Training\Training;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +20,10 @@ class EnrollmentFactory extends Factory
     {
         return [
             //
+            'user_id' => User::factory(),
+            'training_id' => Training::factory(),
+            'status' => $this->faker->randomElement(['pending', 'approved', 'completed']),
+            'enrolled_at' => $this->faker->dateTimeBetween('-1 month', 'now'),
         ];
     }
 }

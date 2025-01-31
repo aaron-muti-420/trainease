@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('trainings', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('training_type');
             $table->text('description');
             $table->string('image');
-            $table->foreignId('trainer_id')->onDelete('cascade')->nullable();
+            $table->foreignId('user_id')->onDelete('cascade');
             $table->integer('max_participants');
             $table->string('location');
             $table->dateTime('start_date');

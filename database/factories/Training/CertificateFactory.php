@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Training;
 
+use App\Models\Training\Enrollment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,9 @@ class CertificateFactory extends Factory
     {
         return [
             //
+            'enrollment_id' => Enrollment::factory(), // Assuming you have an Enrollment factory
+            'certificate_path' => $this->faker->word . '.pdf', // You can adjust this to generate a realistic file path
+            'issued_at' => $this->faker->date(), // Generate a random date
         ];
     }
 }

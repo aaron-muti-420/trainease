@@ -18,6 +18,9 @@ class DepartmentFactory extends Factory
     {
         return [
             //
+            'name' => $this->faker->word(),
+            'description' => $this->faker->sentence(),
+            'division_id' => \App\Models\Organisation\Division::factory(),
         ];
     }
 }
