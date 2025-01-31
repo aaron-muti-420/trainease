@@ -20,6 +20,7 @@ class DivisionFactory extends Factory
             //
             'name' => $this->faker->word(),
             'description' => $this->faker->sentence(),
+            'location' => $this->faker->address(),
         ];
     }
 }

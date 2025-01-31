@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Actions\Fortify;
 
 use App\Models\User;
@@ -20,18 +19,34 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input): User
     {
+        // Validate the input fields
         Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'salary_ref_number' => ['required', 'integer'],
+            'gender' => ['required', 'string'],
+            'dob' => ['required', 'date'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
 
+
+
+        // Create the user with the provided input
         return User::create([
-            'name' => $input['name'],
+            'first_name' => $input['first_name'],
+            'last_name' => $input['last_name'],
+            'salary_ref_number' => $input['salary_ref_number'],
+            'gender' => $input['gender'],
+            'dob' => $input['dob'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
+            'profile_photo_path' => $input['profile_photo_path'] ?? null,
+            'department_id' => $input['department_id'] ?? null,
+            'supervisor_id' => $input['supervisor_id'] ?? null,
         ])->assignRole('staff');
+
 
 
     }

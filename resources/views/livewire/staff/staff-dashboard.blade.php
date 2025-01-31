@@ -2,17 +2,15 @@
 
     <div class="mb-9">
         <h1 class="font-bold text-lg">
-            Your Skills
+            Your Training
         </h1>
-        <div class="flex grid grid-cols-2 gap-3 my-3 ">
-            <div class="bg-white border p-9 rounded-3xl h-64 hover:bg-gray-100 transition duration-300 ease-in-out ">
-                <h2 class="uppercase font-light text-sm text-gray-400 mb-6"> New Skill</h2>
-                <h1 class="font-bold text-3xl">Add your first skill</h1>
-                <p class="text-xs text-gray-400 my-6">Explore and add your first skill to get started. TrainEase offers
-                    a variety of skills, tracks and tutorials for you to learn and improve.</p>
-                <button
+        <div class="flex grid grid-cols-2 gap-3 my-3 justify-center items-center">
+            <div class="bg-white border p-9  rounded-3xl h-64 hover:bg-gray-100 transition duration-300 ease-in-out ">
+                <h1 class="font-bold text-3xl">Enroll in your first Training</h1>
+                <p class="text-xs text-gray-400 my-6">Explore and add your first training course to get started. TrainEase offers a variety of trainings and tutorials for you to learn and improve.</p>
+                <a href={{route('training.courses')}}
                     class="p-2 border border-black rounded-lg hover:bg-white transition duration-300 ease-in-out ">Explore
-                    Skills</button>
+                    Training Courses</a>
             </div>
 
 
@@ -60,14 +58,14 @@
             <div class="bg-white p-6 rounded-3xl border">
                 <h2 class="text-2xl  font-bold mb-4">Train By Category</h2>
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
-                  <div class="bg-gradient-to-br from-orange-300 to-orange-500 p-4 text-white rounded-lg"><h1 class="font-bold">Technical</h1>
+                  <div class="bg-gradient-to-br from-orange-100 to-orange-300 p-4 text-slate-800 rounded-2xl"><h1 class="font-bold">Technical</h1>
                     <h2 class="text-xs">Training Consultant: Dino Almirall</h2>
                 </div>
-                  <div class="bg-gradient-to-br from-orange-300 to-orange-500 p-4 text-white rounded-lg"> <h1 class="font-bold">Commercial & General</h1>
+                  <div class="bg-gradient-to-br from-orange-100 to-orange-300 p-4 text-slate-800 rounded-2xl"> <h1 class="font-bold">Commercial & General</h1>
                     <h2 class="text-xs">Training Consultant: Johanna Haupindi</h2>
 
                   </div>
-                  <div class="bg-gradient-to-br from-orange-300 to-orange-500 p-4  text-white rounded-lg"><h1 class="font-bold">
+                  <div class="bg-gradient-to-br from-orange-100 to-orange-300 p-4 text-slate-800 rounded-2xl"><h1 class="font-bold">
                     Information Technology</h1>
                 <h2 class="text-xs">Training Consultant: Vivian Malander</h2>
                 </div>

@@ -17,13 +17,14 @@ class TrainingFactory extends Factory
      */
     public function definition(): array
     {
+        $trainer_ids = User::role('trainer')->get();
         return [
             //
             'title' => $this->faker->sentence(3),
             'training_type' => $this->faker->randomElement(['Internal', 'External']),
             'description' => $this->faker->paragraph(),
             'image' => $this->faker->imageUrl(640, 480, 'education', true, 'training'),
-            'user_id' => User::factory(), // Assumes trainers are users
+            'user_id' => fake()->randomElement($trainer_ids), // Assumes trainers are users
             'max_participants' => $this->faker->numberBetween(10, 50),
             'location' => $this->faker->city(),
             'start_date' => $this->faker->dateTimeBetween('+1 week', '+1 month'),

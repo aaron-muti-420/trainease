@@ -3,6 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Models\Organisation\Department;
+use App\Models\Training\Badge;
+use App\Models\Training\Certificate;
+use App\Models\Training\Enrollment;
+use App\Models\Training\SubsistenceAndTravel;
+use App\Models\Training\Training;
+use App\Models\Training\TrainingRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -29,9 +37,16 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'salary_ref_number',
+        'supervisor_id',
+        'department_id',
+        'dob',
+        'gender'
+
     ];
 
     /**
@@ -67,4 +82,57 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    /**
+     * Get the Supervisor of the user
+     */
+    public function supervisor(){
+        return $this->belongsTo(User::class,'supervisor_id');
+    }
+    /**
+     * Get the users a user is supervising
+     */
+    public function supervising(){
+        return $this->hasMany(User::class, 'supervisor_id');
+    }
+    /**
+     * Get the users badges
+     */
+    public function badges(){
+        return $this->hasMany(Badge::class, 'user_id');
+    }
+    /**
+     * Get the Training Requests of the user
+     */
+    public function trainingRequests(){
+        return $this->hasMany(TrainingRequest::class, 'user_id');
+    }
+    /**
+     * Get the S&T Requests of the user
+     */
+    public function subsistenceAndTravelRequests(){
+        return $this->hasMany(SubsistenceAndTravel::class, 'user_id');
+    }
+    /**
+     * Get the users department
+     */
+    public function department(){
+        return $this->belongsTo(Department::class, 'department_id');
+    }
+    /**
+     * Get the trainings a user is enrolled in
+     */
+    public function trainerTrainings(){
+        return $this->hasMany(Training::class, 'user_id');
+    }
+    /**
+     * Get the users enrollments
+     */
+    public function enrollement(){
+        return $this->belongsToMany(Enrollment::class,'user_id','training_id');
+    }
+
+
+
+
+
 }

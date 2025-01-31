@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
+use Nette\Utils\Random;
+use Spatie\Permission\Models\Role;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -42,7 +44,22 @@ class UserFactory extends Factory
             'current_team_id' => null,
         ];
     }
+    public function configure()
+    {
+        return $this->afterCreating(function (User $user) {
+            // Fetch or create roles
+            $adminRole = Role::firstOrCreate(['name' => 'admin']);
+            $trainerRole = Role::firstOrCreate(['name' => 'trainer']);
+            $staffRole = Role::firstOrCreate(['name' => 'staff']);
 
+            // Create an array of roles and pick a random one
+            $roles = [$adminRole, $trainerRole, $staffRole];
+            $randomRole = $roles[array_rand($roles)]; // Pick a random role
+
+            // Assign the random role to the user
+            $user->assignRole($randomRole);
+        });
+    }
     /**
      * Indicate that the model's email address should be unverified.
      */
