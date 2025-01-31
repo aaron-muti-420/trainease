@@ -9,4 +9,6 @@ class TrainingRequest extends Model
 {
     /** @use HasFactory<\Database\Factories\Training\TrainingRequestFactory> */
     use HasFactory;
+
+    protected $guarded = [];
 }

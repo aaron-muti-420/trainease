@@ -16,9 +16,9 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link href="{{route('training.courses')}}" :active="request()->routeIs('training.courses')">
-                        {{ __('Training Courses') }}
+                        {{ __('Online Courses') }}
                     </x-nav-link>
-                    <x-nav-link href="#">
+                    <x-nav-link href="{{route('training.request')}}" :active="request()->routeIs('training.request')">
                         {{ __('Request for Training') }}
                     </x-nav-link>
 
