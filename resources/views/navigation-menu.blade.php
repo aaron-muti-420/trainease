@@ -15,12 +15,16 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link href="{{route('my.trainings')}}" :active="request()->routeIs('my.trainings')">
+                        {{ __('My Training') }}
+                    </x-nav-link>
                     <x-nav-link href="{{route('training.courses')}}" :active="request()->routeIs('training.courses')">
                         {{ __('Online Courses') }}
                     </x-nav-link>
                     <x-nav-link href="{{route('training.request')}}" :active="request()->routeIs('training.request')">
                         {{ __('Request for Training') }}
                     </x-nav-link>
+
 
 
                 </div>

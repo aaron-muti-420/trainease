@@ -17,12 +17,93 @@ class CourseMaterialFactory extends Factory
      */
     public function definition(): array
     {
+        $materialType = $this->faker->randomElement(['Video', 'Text', 'Quiz']);
+        $training_id = Training::all()->pluck('id');
+
+
+
+        $materialContent = [];
+
+        $duration = null;
+
+
+        switch ($materialType) {
+
+            case 'video':
+
+                $materialContent = [
+
+                    'video_url' => $this->faker->url(),
+
+                    'description' => $this->faker->paragraph(),
+
+                ];
+
+                $duration = $this->faker->time('H:i:s'); // Generate a random duration
+
+                break;
+
+
+            case 'text':
+
+                $materialContent = [
+
+                    'content' => $this->faker->paragraphs(3, true), // Generate a random text content
+
+                ];
+
+                break;
+
+
+            case 'quiz':
+
+                $materialContent = [
+
+                    'questions' => [
+
+                        [
+
+                            'question' => $this->faker->sentence(),
+
+                            'options' => [
+
+                                $this->faker->sentence(),
+
+                                $this->faker->sentence(),
+
+                                $this->faker->sentence(),
+
+                                $this->faker->sentence(),
+
+                            ],
+
+                            'correct_answer' => $this->faker->sentence(),
+
+                        ],
+
+                        // You can add more questions if needed
+
+                    ],
+
+                ];
+
+                break;
+
+        }
+
+
         return [
-            //
-            'training_id' => Training::factory(),
+
+            'training_id' => fake()->randomElement($training_id),
+
             'material_name' => $this->faker->sentence(3),
-            'material_type' => $this->faker->randomElement(['pdf', 'video', 'document', 'presentation']),
-            'material_url' => $this->faker->url(),
+
+            'material_type' => $materialType,
+
+            'material_content' => json_encode($materialContent), // Store as JSON
+
+            'duration' => $duration,
+
         ];
     }
 }

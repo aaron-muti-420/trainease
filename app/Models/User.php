@@ -37,6 +37,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+
         'first_name',
         'last_name',
         'email',
@@ -45,7 +46,11 @@ class User extends Authenticatable
         'supervisor_id',
         'department_id',
         'dob',
-        'gender'
+        'gender',
+        'supervisor_id',
+        'training_id',
+        'status',
+        'enrolled_at'
 
     ];
 
@@ -127,9 +132,11 @@ class User extends Authenticatable
     /**
      * Get the users enrollments
      */
-    public function enrollement(){
-        return $this->belongsToMany(Enrollment::class,'user_id','training_id');
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollment::class, 'user_id');
     }
+
 
 
 

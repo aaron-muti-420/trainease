@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -14,9 +13,11 @@ return new class extends Migration
         Schema::create('course_materials', function (Blueprint $table) {
             $table->id();
             $table->foreignId('training_id')->constrained()->onDelete('cascade');
-            $table->string('material_name');
-            $table->string('material_type');
-            $table->string('material_url');
+            $table->string('material_name'); // Title of the material
+            $table->string('material_type'); // Type of the material (Video, Text, Quiz)
+            $table->text('material_content')->nullable(); // Store JSON or text content
+            $table->string('material_url')->nullable();
+            $table->string('duration')->nullable(); // Duration for video materials
             $table->timestamps();
         });
     }

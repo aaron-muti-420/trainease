@@ -2,21 +2,44 @@
 
     <div class="mb-9">
         <h1 class="font-bold text-lg">
-            Your Training
+            Your Training <a href={{route('my.trainings')}} ><span class="text-orange-500 text-sm">({{$courseCount}})</span> </a>
         </h1>
-        <div class="flex grid grid-cols-2 gap-3 my-3 justify-center items-center">
-            <div class="bg-white border p-9  rounded-3xl h-64 hover:bg-gray-100 transition duration-300 ease-in-out ">
-                <h1 class="font-bold text-3xl">Enroll in your first Training</h1>
-                <p class="text-xs text-gray-400 my-6">Explore and add your first training course to get started. TrainEase offers a variety of trainings and tutorials for you to learn and improve.</p>
-                <a href={{route('training.courses')}}
-                    class="p-2 border border-black rounded-lg hover:bg-white transition duration-300 ease-in-out ">Explore
-                    Training Courses</a>
-            </div>
+        <div class="flex my-3 justify-start items-center">
+            @if ($enrolledCourses->isNotEmpty())
+                @foreach ($enrolledCourses as $course)
+                <div class="flex-shrink-0 w-1/3 min-w-[300px] p-3"> <!-- Set a min-width for better visibility -->
+                    <div class="bg-white border border-gray-200 rounded-3xl p-6 h-auto hover:border transition duration-300 ease-in-out">
+                        <div class="flex flex-col justify-between h-full flex-shrink-0">
+                            <!-- Course Title -->
+                            <h1 class="text-lg font-semibold text-gray-900">{{ $course->training->title }}</h1>
 
+                            <!-- Course Description -->
+                            <p class="text-sm text-gray-600 mt-2 line-clamp-2">{{ $course->training->description }}</p>
 
-
+                            <!-- CTA Button -->
+                            <a href="{{ route('start.course', $course->training->id) }}"
+                                class="mt-6 flex items-center justify-center gap-2 px-4 py-2 bg-orange-600 text-white text-sm font-medium rounded-full border hover:bg-orange-700 transition duration-300 ease-in-out">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                                </svg>
+                                Continue Learning
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            @else
+                <div class="bg-white border p-12 rounded-3xl h-64 hover:bg-gray-100 transition duration-300 ease-in-out">
+                    <h1 class="font-bold text-3xl">Enroll in your first Training</h1>
+                    <p class="text-xs text-gray-400 my-6">Explore and add your first training course to get started.
+                        TrainEase offers a variety of trainings and tutorials for you to learn and improve.</p>
+                    <a href="{{ route('training.courses') }}"
+                        class="p-2 border border-black rounded-lg hover:bg-white transition duration-300 ease-in-out">
+                        Explore Training Courses
+                    </a>
+                </div>
+            @endif
         </div>
-    </div>
     <div class="mb-9">
         <h1 class="font-bold text-lg">
             Certifications

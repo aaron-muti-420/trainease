@@ -16,4 +16,11 @@ class Training extends Model
     public function trainer(){
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function enrollment(){
+        return $this->belongsToMany(Enrollment::class,'user_id','training_id');
+    }
+
+    public function courseMaterials(){
+        return $this->hasMany(CourseMaterial::class,'training_id');
+    }
 }
