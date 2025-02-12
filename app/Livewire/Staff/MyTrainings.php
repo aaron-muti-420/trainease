@@ -16,6 +16,7 @@ class MyTrainings extends Component
     }
     public function render()
     {
+
         $enrollments = Enrollment::where('user_id', Auth::user()->id)->with('training')->get();
 
         return view('livewire.staff.my-trainings',compact('enrollments'));

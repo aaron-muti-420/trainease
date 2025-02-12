@@ -106,45 +106,49 @@ class DatabaseSeeder extends Seeder
 
             // Create course materials for each training
 
-            CourseMaterial::factory(3)->create(['training_id' => $training->id]); // Adjust the number of materials as needed
+            CourseMaterial::factory(12)->create([
+                'training_id' => $training->id,
+            ]);
+
+
 
         }
 
         $this->command->info("\n");
 
 
-        // Start seeding Subsistence and Travel with progress bar
+        // // Start seeding Subsistence and Travel with progress bar
 
-        $this->command->info('Seeding Subsistence and Travel...');
+        // $this->command->info('Seeding Subsistence and Travel...');
 
-        $subsistenceAndTravelBar = $this->command->getOutput()->createProgressBar($subsistenceAndTravelCount);
+        // $subsistenceAndTravelBar = $this->command->getOutput()->createProgressBar($subsistenceAndTravelCount);
 
-        $subsistenceAndTravelBar->start();
+        // $subsistenceAndTravelBar->start();
 
-        SubsistenceAndTravel::factory($subsistenceAndTravelCount)->create();
+        // SubsistenceAndTravel::factory($subsistenceAndTravelCount)->create();
 
-        $subsistenceAndTravelBar->advance($subsistenceAndTravelCount);
+        // $subsistenceAndTravelBar->advance($subsistenceAndTravelCount);
 
-        $subsistenceAndTravelBar->finish();
+        // $subsistenceAndTravelBar->finish();
 
-        $this->command->info("\n");
+        // $this->command->info("\n");
 
 
-        // Start seeding Badges with progress bar
+        // // Start seeding Badges with progress bar
 
-        $this->command->info('Seeding Badges...');
+        // $this->command->info('Seeding Badges...');
 
-        $badgeBar = $this->command->getOutput()->createProgressBar($badgeCount);
+        // $badgeBar = $this->command->getOutput()->createProgressBar($badgeCount);
 
-        $badgeBar->start();
+        // $badgeBar->start();
 
-        Badge::factory($badgeCount)->create();
+        // Badge::factory($badgeCount)->create();
 
-        $badgeBar->advance($badgeCount);
+        // $badgeBar->advance($badgeCount);
 
-        $badgeBar->finish();
+        // $badgeBar->finish();
 
-        $this->command->info("\n");
+        // $this->command->info("\n");
 
 
         $this->command->info('Database seeding completed!');

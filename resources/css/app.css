@@ -5,3 +5,27 @@
 [x-cloak] {
     display: none;
 }
+/* Apply to all scrollable elements */
+.scrollable-content {
+    overflow-y: auto;
+    max-height: 80vh; /* Adjust height */
+}
+
+/* Custom scrollbar */
+.scrollable-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrollable-content::-webkit-scrollbar-track {
+    background: #e5e7eb;
+    border-radius: 10px;
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+    background: #6b7280;
+    border-radius: 10px;
+}
+
+.scrollable-content::-webkit-scrollbar-thumb:hover {
+    background: #374151;
+}

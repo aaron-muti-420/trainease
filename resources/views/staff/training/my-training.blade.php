@@ -10,7 +10,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden border sm:rounded-3xl p-6">
+            <div class="sm:rounded-3xl p-6">
                 @livewire('staff.my-trainings')
             </div>
         </div>

@@ -17,7 +17,6 @@
                 @role('trainer')
                     @livewire('trainer.trainer-dashboard')
                 @endrole
-
                 {{-- Display User Content --}}
                 @role('staff')
                     @livewire('staff.staff-dashboard')

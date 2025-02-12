@@ -20,7 +20,7 @@ class Training extends Model
         return $this->belongsToMany(Enrollment::class,'user_id','training_id');
     }
 
-    public function courseMaterials(){
-        return $this->hasMany(CourseMaterial::class,'training_id');
+    public function materials() {
+        return $this->hasMany(CourseMaterial::class);
     }
 }

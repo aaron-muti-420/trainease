@@ -15,6 +15,7 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @role('staff')
                     <x-nav-link href="{{route('my.trainings')}}" :active="request()->routeIs('my.trainings')">
                         {{ __('My Training') }}
                     </x-nav-link>
@@ -24,7 +25,11 @@
                     <x-nav-link href="{{route('training.request')}}" :active="request()->routeIs('training.request')">
                         {{ __('Request for Training') }}
                     </x-nav-link>
+                    @endrole
 
+                    @role('admin')
+                    <x-nav-link href=# >{{Woww}}</x-nav-link>
+                    @endrole
 
 
                 </div>

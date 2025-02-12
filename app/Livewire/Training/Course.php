@@ -6,6 +6,7 @@ use App\Models\Training\CourseMaterial;
 use App\Models\Training\Enrollment;
 use App\Models\Training\Training;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Livewire\Component;
 
 class Course extends Component
@@ -14,7 +15,7 @@ class Course extends Component
     {
 
         // Ensure the user is enrolled and their status is "approved" or "completed"
-        $training = Training::findOrFail($training_id);
+        $training = Training::findOrFail(Crypt::decrypt($training_id));
         $enrollment = Auth::user()
             ->enrollments->where('training_id', $training->id)
             ->whereIn('status', ['approved', 'completed'])
@@ -24,13 +25,11 @@ class Course extends Component
             abort(403, 'You are not authorized to access this course.');
         }
 
-        $courseContent = CourseMaterial::where('training_id', $training->id)->get();
-
-
+        $courseMaterials = CourseMaterial::where('training_id', $training->id)->get();
 
         // Access the course materials
 
-        return view('training.course', compact('training', 'enrollment', 'courseContent'));
+        return view('training.course', compact('training', 'enrollment', 'courseMaterials'));
     }
 
     public function complete(Training $training)

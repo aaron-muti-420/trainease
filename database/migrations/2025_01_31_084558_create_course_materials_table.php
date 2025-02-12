@@ -14,12 +14,14 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('training_id')->constrained()->onDelete('cascade');
             $table->string('material_name'); // Title of the material
-            $table->string('material_type'); // Type of the material (Video, Text, Quiz)
-            $table->text('material_content')->nullable(); // Store JSON or text content
-            $table->string('material_url')->nullable();
-            $table->string('duration')->nullable(); // Duration for video materials
+            $table->enum('material_type', ['video', 'text', 'quiz']); // Restrict to valid types
+            $table->text('material_content')->nullable(); // For text content or JSON quiz data
+            $table->string('material_url')->nullable(); // For videos
+            $table->integer('duration')->nullable(); // Store duration in seconds for videos
+            $table->json('quiz_data')->nullable(); // Store quizzes in JSON format
             $table->timestamps();
         });
+
     }
 
     /**

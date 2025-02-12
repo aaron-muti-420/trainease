@@ -1,109 +1,84 @@
 <?php
 
 namespace Database\Factories\Training;
-
-use App\Models\Training\Training;
-use Illuminate\Database\Eloquent\Factories\Factory;
-
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Training\CourseMaterial>
  */
+use App\Models\Training\Training;
+use App\Models\Training\CourseMaterial;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
 class CourseMaterialFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+    protected $model = CourseMaterial::class;
+
+    public function definition()
     {
-        $materialType = $this->faker->randomElement(['Video', 'Text', 'Quiz']);
-        $training_id = Training::all()->pluck('id');
-
-
-
-        $materialContent = [];
-
+        $courseTitles= [
+            "Laravel for Beginners: A Comprehensive Guide",
+            "Building RESTful APIs with Laravel",
+            "Mastering Laravel: Advanced Techniques and Best Practices",
+            "Laravel E-commerce Development: Create Your Online Store",
+            "Laravel and Vue.js: Building Modern Web Applications",
+            "Laravel Testing: Write Effective Tests for Your Applications",
+            "Laravel 9: The Complete Guide to Building Web Applications",
+            "Laravel Security: Protecting Your Applications from Vulnerabilities",
+            "Building Real-Time Applications with Laravel and Pusher",
+            "Laravel and Docker: Containerizing Your Applications",
+            "Laravel Blade Templating: Creating Dynamic Views",
+            "Laravel Authentication and Authorization: Securing Your App",
+            "Laravel and GraphQL: Building APIs with Laravel",
+            "Laravel Package Development: Create Your Own Packages",
+            "Laravel for Freelancers: Building Projects for Clients"
+        ];
+        $materialType = $this->faker->randomElement(['video', 'text', 'quiz']);
+        $materialContent = null;
+        $materialUrl = null;
         $duration = null;
-
+        $quizData = null;
 
         switch ($materialType) {
-
             case 'video':
+                $materialUrl = $this->faker->randomElement([
+                    'https://www.youtube.com/embed/sD9Z_SrU85o',
+                    'https://www.youtube.com/embed/ud7YxC33Z3w',
+                    'https://www.youtube.com/embed/DU8o-OTeoCc'
 
-                $materialContent = [
-
-                    'video_url' => $this->faker->url(),
-
-                    'description' => $this->faker->paragraph(),
-
-                ];
-
-                $duration = $this->faker->time('H:i:s'); // Generate a random duration
-
+                ]);
+                $duration = $this->faker->numberBetween(60, 3600); // 1 min to 1 hr
                 break;
-
 
             case 'text':
-
-                $materialContent = [
-
-                    'content' => $this->faker->paragraphs(3, true), // Generate a random text content
-
-                ];
-
+                $materialContent = $this->faker->text();
                 break;
-
 
             case 'quiz':
-
-                $materialContent = [
-
+                $quizData = [
+                    'title' => 'Sample Quiz',
                     'questions' => [
-
                         [
-
-                            'question' => $this->faker->sentence(),
-
-                            'options' => [
-
-                                $this->faker->sentence(),
-
-                                $this->faker->sentence(),
-
-                                $this->faker->sentence(),
-
-                                $this->faker->sentence(),
-
-                            ],
-
-                            'correct_answer' => $this->faker->sentence(),
-
+                            'question' => 'What is Laravel?',
+                            'options' => ['Framework', 'Library', 'Tool'],
+                            'correct_answer' => 'Framework',
                         ],
-
-                        // You can add more questions if needed
-
+                        [
+                            'question' => 'Which command creates a migration?',
+                            'options' => ['make:migration', 'create:migration', 'new:migration'],
+                            'correct_answer' => 'make:migration',
+                        ],
                     ],
-
                 ];
-
                 break;
-
         }
 
-
         return [
-
-            'training_id' => fake()->randomElement($training_id),
-
-            'material_name' => $this->faker->sentence(3),
-
+            'training_id' => $this->faker->numberBetween(1, Training::count()),
+            'material_name' => $this->faker->randomElement($courseTitles),
             'material_type' => $materialType,
-
-            'material_content' => json_encode($materialContent), // Store as JSON
-
+            'material_content' => $materialContent,
+            'material_url' => $materialUrl,
             'duration' => $duration,
-
+            'quiz_data' => $quizData,
         ];
     }
 }

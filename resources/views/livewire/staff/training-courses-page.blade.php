@@ -16,33 +16,48 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 my-3">
             @foreach ($trainings as $training)
-                <div class="max-w-sm rounded-3xl overflow-hidden border bg-white p-6">
-                    <div>
-                        <img src='{{asset($training->image)}}'/>
-                    </div>
-                    <div class="px-4 py-3">
-                        <h2 class="font-semibold text-lg text-gray-900">{{ $training->title }}</h2>
-                        <p class="text-sm text-gray-600 mt-2 line-clamp-2">{{ $training->description }}</p>
-                        <p class="text-sm text-orange-600 bg-orange-200 rounded-lg p-2 mt-2">
-                            <span class="font-bold">Trainer: </span> {{ $training->trainer->first_name }} {{ $training->trainer->last_name }}
-                        </p>
+                <div class="bg-white border rounded-xl hover:bg-gray-50 overflow-hidden transition shadow-lg cursor-pointer" >
+                    {{-- Image at the top --}}
+                    <img src="{{asset($training->image)}}"
+                        class="w-full h-40 object-cover rounded-t-xl hover:scale-105 transition duration-300 ease-in-out"
+                        alt="{{ $training->title }}">
 
-                        @if(in_array($training->id, $userEnrollments))
-                            <button class="mt-4 px-4 py-2 w-full text-white bg-gray-400 rounded-lg border cursor-not-allowed">
-                                Already Enrolled
-                            </button>
-                        @else
-                            <button
-                                class="mt-4 px-4 py-2 w-full text-white bg-slate-700 rounded-lg border hover:bg-slate-800 transition duration-300 ease-in-out"
-                                wire:click="enroll({{ $training->id }})">
-                                Enroll
-                            </button>
-                        @endif
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold text-gray-900">{{ $training->title }}</h3>
+                        <p class="text-sm text-gray-500 mt-2">{{ $training->description }}</p>
+
+                        <div class="mt-4">
+                            {{-- Trainer Chip (Click to Open Modal) --}}
+                            <span
+                                class="inline-block bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
+                                @click="getTrainerInfo({{ $training->trainer->id }})">
+                                Trainer: {{ $training->trainer->first_name }}
+                            </span>
+
+                        </div>
+
+                        {{-- <x-button wire:click="openModal({{ $training->id }}">open<x-button> --}}
+
                     </div>
                 </div>
             @endforeach
         </div>
+
         {{ $trainings->links() }}
+
+        {{-- Trainer Info Modal --}}
+        <x-modal id="courseModal" maxWidth="2xl" wire:model="showCourseModal">
+            <div class="p-6">
+                <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Course Details</h2>
+                <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                    {{ $training ? $training->title : 'No course selected' }}
+                </p>
+
+                <button wire:click="$set('showCourseModal', false)" class="mt-4 px-4 py-2 bg-gray-600 text-white rounded">
+                    Close
+                </button>
+            </div>
+        </x-modal>
 
     </div>
 </div>

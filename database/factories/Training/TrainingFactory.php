@@ -44,12 +44,12 @@ class TrainingFactory extends Factory
                 'Master front-end and back-end development with hands-on coding projects and real-world examples.'
             ]),
 
-            'image' => fake()->randomElement([
-                'https://source.unsplash.com/640x480/?training,workshop',
-                'https://source.unsplash.com/640x480/?business,conference',
-                'https://source.unsplash.com/640x480/?technology,education',
-                'https://source.unsplash.com/640x480/?leadership,teamwork',
-                'https://source.unsplash.com/640x480/?cybersecurity,computer'
+            'image' => fake()->unique()->randomElement([
+                'https://cdn.dribbble.com/userupload/24948738/file/original-ad010e4d2c92e55b1649db5a1676d2bd.jpg?resize=1504x1128&vertical=center',
+                'https://cdn.dribbble.com/userupload/23443859/file/original-d03b3c9846e8a36a861903489e9a426c.png?resize=1504x1128&vertical=center',
+                'https://cdn.dribbble.com/userupload/2999484/file/original-7064877ce42f47033be7b9782a562fa6.png?resize=1504x847&vertical=center',
+                'https://cdn.dribbble.com/userupload/4143912/file/original-6f88b78f2d9a4a9c47c3430664f16e0e.png?resize=1504x846&vertical=center',
+                'https://cdn.dribbble.com/userupload/2999482/file/original-b6fa5d1582046dfd653080959c067efc.png?resize=1504x846&vertical=center'
             ]),
 
             'user_id' => fake()->randomElement($trainer_ids), // Random trainer ID

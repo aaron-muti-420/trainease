@@ -7,6 +7,8 @@ namespace App\Models;
 use App\Models\Organisation\Department;
 use App\Models\Training\Badge;
 use App\Models\Training\Certificate;
+use App\Models\Training\CourseMaterial;
+use App\Models\Training\CourseProgress;
 use App\Models\Training\Enrollment;
 use App\Models\Training\SubsistenceAndTravel;
 use App\Models\Training\Training;
@@ -138,6 +140,36 @@ class User extends Authenticatable
     }
 
 
+    public function courseProgress()
+    {
+        return $this->hasMany(CourseProgress::class);
+    }
+    public function calculateProgress($trainingId)
+
+    {
+
+        // Get all course materials for the training
+
+        $courseMaterials = CourseMaterial::where('training_id', $trainingId)->get();
+        $totalMaterials = $courseMaterials->count();
+
+
+        // Get completed materials for the user in this training
+
+        $completedMaterials = $this->courseProgress()
+
+            ->whereIn('course_material_id', $courseMaterials->pluck('id'))
+
+            ->where('status', 'completed')
+
+            ->count();
+
+
+        // Calculate progress percentage
+
+        return $totalMaterials > 0 ? ($completedMaterials / $totalMaterials) * 100 : 0;
+
+    }
 
 
 
