@@ -9,11 +9,12 @@ use Livewire\Component;
 
 class TrainingCoursesPage extends Component
 {
-    public $showCourseModal = false;
-    public $selectedCourse;
+
+
     public function index(){
         return view('staff.training.courses');
     }
+
     public function enroll($trainingId)
     {
         $userId = Auth::id();
@@ -35,13 +36,6 @@ class TrainingCoursesPage extends Component
         session()->flash('success', 'Successfully enrolled in the course.');
     }
 
-
-
-    public function openModal($trainingId)
-    {
-        $this->selectedCourse = Training::find($trainingId);
-        $this->showCourseModal = true;
-    }
 
 
 
