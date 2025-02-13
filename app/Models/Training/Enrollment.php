@@ -22,4 +22,5 @@ class Enrollment extends Model
     {
         return $this->belongsTo(Training::class, 'training_id');
     }
+
 }

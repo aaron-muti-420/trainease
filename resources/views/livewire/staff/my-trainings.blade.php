@@ -8,7 +8,7 @@
                     <a href="{{ route('start.course', Crypt::encrypt($enrollment->training->id)) }}" class="block">
                         <div class="bg-white border overflow-hidden rounded-xl hover:bg-gray-50  transition">
                             {{-- Image at the top --}}
-                            <img src="{{asset($training->image)}}"
+                            <img src="{{asset($enrollment->training->image)}}"
                                 class="w-full h-40 object-cover rounded-t-xl hover:scale-105 transition duration-300 ease-in-out"
                                 alt="{{ $enrollment->training->title }}">
                             <div class="p-6">

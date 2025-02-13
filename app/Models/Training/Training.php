@@ -21,6 +21,6 @@ class Training extends Model
     }
 
     public function materials() {
-        return $this->hasMany(CourseMaterial::class);
+        return $this->hasMany(CourseMaterial::class, 'training_id');
     }
 }

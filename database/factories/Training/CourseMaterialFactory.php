@@ -73,6 +73,7 @@ class CourseMaterialFactory extends Factory
 
         return [
             'training_id' => $this->faker->numberBetween(1, Training::count()),
+            'description' => $this->faker->sentence(),
             'material_name' => $this->faker->randomElement($courseTitles),
             'material_type' => $materialType,
             'material_content' => $materialContent,
